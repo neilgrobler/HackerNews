@@ -1,39 +1,44 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HackerNews.Classes;
 using HackerNews.Interfaces;
 using HtmlAgilityPack;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace HackerNews.Implementations
 {
-    public partial class PostScraper : IPostScraper
+    public class Scraper : IScraper
     {
-        private readonly IConfiguration _configuration;
+        private readonly string _host;
+        private readonly IHttpGetService _httpGetService;
+        private readonly INextPageUrlParser _nextPageUrlParser;
         private readonly INodeCounter _nodeCounter;
         private readonly IPostParser _postParser;
-        private readonly INextPageUrlParser _nextPageUrlParser;
-        private readonly HtmlWeb _htmlParser;
 
 
-        public PostScraper(IConfiguration configuration, INodeCounter nodeCounter, IPostParser postParser, INextPageUrlParser nextPageUrlParser)
+        public Scraper(IOptions<HackerNewsOptions> options, IHttpGetService httpGetService, INodeCounter nodeCounter,
+            IPostParser postParser, INextPageUrlParser nextPageUrlParser)
         {
-            _configuration = configuration;
+            _host = options.Value.Host;
+            _httpGetService = httpGetService;
             _nodeCounter = nodeCounter;
             _postParser = postParser;
             _nextPageUrlParser = nextPageUrlParser;
-            _htmlParser = new HtmlWeb();
         }
 
         public async Task<string> ScrapeAsync(int count)
         {
             var output = new List<Post>();
-            var url = _configuration.GetValue<string>("Host");
+            var url = _host;
 
             do
             {
                 // Fetch the HTML
-                var htmlDoc = await _htmlParser.LoadFromWebAsync(url);
+                var html = await _httpGetService.Get(url);
+
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(html);
 
                 // Get the number of items
                 var nodeCount = _nodeCounter.CountNodes(htmlDoc);
@@ -44,9 +49,7 @@ namespace HackerNews.Implementations
 
                 // Iterate through the items in the page
                 for (var index = 1; index <= nodeCount && output.Count < count; index++)
-                {
                     output.Add(_postParser.Parse(htmlDoc, index));
-                }
 
                 // Get the URL for the next page
                 url = _nextPageUrlParser.Parse(htmlDoc);

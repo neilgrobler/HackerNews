@@ -3,6 +3,7 @@ using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.IO;
+using HackerNews.Classes;
 using HackerNews.Implementations;
 using HackerNews.Implementations.Parsers;
 using HackerNews.Interfaces;
@@ -46,7 +47,7 @@ namespace HackerNews
 
             rootCommand.Handler = CommandHandler.Create<int>(posts =>
             {
-                var result = serviceProvider.GetService<IPostScraper>().ScrapeAsync(posts).Result;
+                var result = serviceProvider.GetService<IScraper>().ScrapeAsync(posts).Result;
                 Console.Write(result);
             });
             return rootCommand;
@@ -62,7 +63,10 @@ namespace HackerNews
 
             // Setup the container
             var serviceProvider = new ServiceCollection()
-                .AddSingleton(configuration)
+                .AddHttpClient()
+                .AddSingleton(configuration).Configure<HackerNewsOptions>(
+                    configuration.GetSection("HackerNews"))
+                .AddSingleton<IHttpGetService, HttpGetService>()
                 .AddSingleton<IAuthorParser, AuthorParser>()
                 .AddSingleton<ICommentsParser, CommentsParser>()
                 .AddSingleton<INextPageUrlParser, NextPageUrlParser>()
@@ -72,7 +76,7 @@ namespace HackerNews
                 .AddSingleton<IRankParser, RankParser>()
                 .AddSingleton<ITitleParser, TitleParser>()
                 .AddSingleton<IUrlParser, UrlParser>()
-                .AddSingleton<IPostScraper, PostScraper>()
+                .AddSingleton<IScraper, Scraper>()
                 .BuildServiceProvider();
             return serviceProvider;
         }

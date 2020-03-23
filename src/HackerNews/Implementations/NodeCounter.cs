@@ -9,7 +9,9 @@ namespace HackerNews.Implementations
 
         public int CountNodes(HtmlDocument htmlDoc)
         {
-            return htmlDoc.DocumentNode.SelectNodes(XPath).Count;
+            var nodes = htmlDoc.DocumentNode.SelectNodes(XPath);
+
+            return nodes?.Count ?? 0;
         }
     }
 }

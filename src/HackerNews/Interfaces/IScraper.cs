@@ -2,7 +2,7 @@
 
 namespace HackerNews.Interfaces
 {
-    public interface IPostScraper
+    public interface IScraper
     {
         Task<string> ScrapeAsync(int count);
     }
