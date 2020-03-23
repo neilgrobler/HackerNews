@@ -25,3 +25,12 @@ Where `n` is the number of posts to print. `n` must be an integer <= 100.
 
 To execute from the command line use the following command from the folder containing the binaries:  
 `hackernews --posts n`
+
+## Implementation notes
+The brief did not specify what to do when values cannot be scraped because they are not present on any given article, so I have assign the following default values for the output:
+ * `Title - "Not specified"`  
+ * `Author - "Anonymous"`  
+ * `Url = ""`  
+ * `Point - 0`  
+ * `Comments - 0`  
+ * `Rank - 0`  
