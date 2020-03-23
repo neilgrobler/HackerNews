@@ -3,7 +3,7 @@ Command line app for the Hacker News Scraper Test. The application targets .Net 
 
 ## Packages Used
  * [HTML Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack)     
-   This makes querying nodes via XPath relatively straightforward.  
+   This makes querying HTML nodes via XPath relatively straightforward.  
  * [System.CommandLine](https://github.com/dotnet/command-line-api)     
    Maps the command line parameter in the main method of the app. It also takes care of the input validation.  
    
