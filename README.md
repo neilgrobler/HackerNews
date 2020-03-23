@@ -1,5 +1,5 @@
 # HackerNews
-Command line app for the Hacker News Scraper Test. The application targets using .Net Core 3.0.
+Command line app for the Hacker News Scraper Test. The application targets .Net Core 3.0.
 
 ## Packages Used
  * [HTML Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack)
