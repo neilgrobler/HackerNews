@@ -19,5 +19,5 @@ The solution can be built by executing Build.bat located in the solution folder.
 The tests can be run by executing Build.bat located in the solution folder, or copying and pasting the command from the batch file to command prompt.
 
 ## Running the application
-The application can be run by executing Run.bat located in the solution folder
+The application can be run by executing Run.bat located in the solution folder.
 
