@@ -21,3 +21,9 @@ The tests can be run by executing `Test.bat` located in the solution folder, or 
 ## Running the application
 The application can be run by executing `Run.bat` located in the solution folder.
 
+The application expects the following arguments:
+`--posts n`
+Where `n` is the number of posts to print. `n` must be an integer <= 100.
+
+To execute from the command line use the following command from the folder containing the binaries:
+`hackernews --posts n`
