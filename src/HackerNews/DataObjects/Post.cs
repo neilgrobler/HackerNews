@@ -1,4 +1,4 @@
-﻿namespace HackerNews
+﻿namespace HackerNews.DataObjects
 {
     public class Post
     {

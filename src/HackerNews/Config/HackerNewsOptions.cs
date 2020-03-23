@@ -1,4 +1,4 @@
-﻿namespace HackerNews.Classes
+﻿namespace HackerNews.Config
 {
     public class HackerNewsOptions
     {

@@ -1,3 +1,4 @@
+using HackerNews.DataObjects;
 using HackerNews.Implementations.Parsers;
 using HackerNews.Interfaces;
 using HtmlAgilityPack;

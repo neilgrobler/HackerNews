@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using HackerNews.DataObjects;
+using HtmlAgilityPack;
 
 namespace HackerNews.Interfaces
 {

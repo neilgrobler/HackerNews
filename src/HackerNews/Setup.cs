@@ -3,7 +3,7 @@ using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.IO;
-using HackerNews.Classes;
+using HackerNews.Config;
 using HackerNews.Implementations;
 using HackerNews.Implementations.Parsers;
 using HackerNews.Interfaces;
@@ -18,6 +18,8 @@ namespace HackerNews
     {
         internal static void JsonSerializerFormatting()
         {
+            // Set the global settings on the serializer to indented
+            // and use camel case formatting
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
                 ContractResolver = new DefaultContractResolver
@@ -30,6 +32,7 @@ namespace HackerNews
 
         internal static RootCommand CommandLineParser(ServiceProvider serviceProvider)
         {
+            // Set up a --post command that takes an integer parameter
             var argument = new Argument<int>("n");
             argument.AddValidator(result =>
             {
@@ -45,6 +48,7 @@ namespace HackerNews
             var rootCommand = new RootCommand("Hacker News Scraper Test");
             rootCommand.AddOption(option);
 
+            // Handle the --post command with the IScraper service
             rootCommand.Handler = CommandHandler.Create<int>(posts =>
             {
                 var result = serviceProvider.GetService<IScraper>().ScrapeAsync(posts).Result;
@@ -62,7 +66,7 @@ namespace HackerNews
                 .Build();
 
             // Setup the container
-            var serviceProvider = new ServiceCollection()
+            return new ServiceCollection()
                 .AddHttpClient()
                 .AddSingleton(configuration).Configure<HackerNewsOptions>(
                     configuration.GetSection("HackerNews"))
@@ -78,7 +82,6 @@ namespace HackerNews
                 .AddSingleton<IUrlParser, UrlParser>()
                 .AddSingleton<IScraper, Scraper>()
                 .BuildServiceProvider();
-            return serviceProvider;
         }
     }
 }

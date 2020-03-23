@@ -11,6 +11,7 @@ namespace HackerNews.BaseClasses
         public string Parse(HtmlDocument htmlDoc, int index)
         {
             var xpath = string.Format(XPath, index);
+
             var node = htmlDoc.DocumentNode.SelectSingleNode(xpath);
 
             if (node == null || string.IsNullOrWhiteSpace(node.InnerText))

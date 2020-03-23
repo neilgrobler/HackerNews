@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using HackerNews.Classes;
+using HackerNews.Config;
 using HackerNews.Interfaces;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Options;
@@ -23,11 +23,8 @@ namespace HackerNews.Implementations.Parsers
             if (node == null)
                 return null;
 
-            // Does the node have and href attribute
             if (!node.Attributes.Contains("href"))
                 return null;
-
-            // Extract the value of the attribute
             var path = node.Attributes.First(a => a.Name == "href").Value;
 
             return string.IsNullOrWhiteSpace(path) ? null : $"{_host}{path}";

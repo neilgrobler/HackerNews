@@ -1,6 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
-using HackerNews.Classes;
+using HackerNews.Config;
+using HackerNews.DataObjects;
 using HackerNews.Implementations;
 using HackerNews.Implementations.Parsers;
 using HackerNews.Interfaces;

@@ -1,5 +1,5 @@
 using System.IO;
-using HackerNews.Classes;
+using HackerNews.Config;
 using HackerNews.Implementations.Parsers;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Options;

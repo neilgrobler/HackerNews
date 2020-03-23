@@ -1,4 +1,5 @@
-﻿using HackerNews.Interfaces;
+﻿using HackerNews.DataObjects;
+using HackerNews.Interfaces;
 using HtmlAgilityPack;
 
 namespace HackerNews.Implementations.Parsers

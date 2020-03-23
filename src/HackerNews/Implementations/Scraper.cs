@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using HackerNews.Classes;
+using HackerNews.Config;
+using HackerNews.DataObjects;
 using HackerNews.Interfaces;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Options;
@@ -37,6 +38,7 @@ namespace HackerNews.Implementations
                 // Fetch the HTML
                 var html = await _httpGetService.Get(url);
 
+                // Load the HTML document
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(html);
 
@@ -55,6 +57,7 @@ namespace HackerNews.Implementations
                 url = _nextPageUrlParser.Parse(htmlDoc);
             } while (output.Count < count && !string.IsNullOrWhiteSpace(url));
 
+            // Serialize the output
             return JsonConvert.SerializeObject(output);
         }
     }
