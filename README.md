@@ -9,7 +9,7 @@ Command line app for the Hacker News Scraper Test. The application targets .Net 
    
    Maps the command line parameter in the main method of the app. It also takes care of the input validation.
 
-## Prerequisits
+## Prerequisites
 Please ensure that you have the .Net Core 3.0 or later SDK installed. The SDK is available for download [here](https://dotnet.microsoft.com/download/dotnet-core/3.0).
 
 ## Building
