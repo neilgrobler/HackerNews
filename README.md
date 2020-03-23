@@ -2,13 +2,11 @@
 Command line app for the Hacker News Scraper Test. The application targets .Net Core 3.0.
 
 ## Packages Used
- * [HTML Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack)
+ * [HTML Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack)     
+   This makes querying nodes via XPath relatively straightforward.  
+ * [System.CommandLine](https://github.com/dotnet/command-line-api)     
+   Maps the command line parameter in the main method of the app. It also takes care of the input validation.  
    
-   This makes querying nodes via XPath relatively straightforward.
- * [System.CommandLine](https://github.com/dotnet/command-line-api)
-   
-   Maps the command line parameter in the main method of the app. It also takes care of the input validation.
-
 ## Prerequisites
 Please ensure that you have the .Net Core 3.0 or later SDK installed. The SDK is available for download [here](https://dotnet.microsoft.com/download/dotnet-core/3.0).
 
@@ -21,9 +19,9 @@ The tests can be run by executing `Test.bat` located in the solution folder, or 
 ## Running the application
 The application can be run by executing `Run.bat` located in the solution folder.
 
-The application expects the following arguments:
-`--posts n`
+The application expects the following arguments:  
+`--posts n`  
 Where `n` is the number of posts to print. `n` must be an integer <= 100.
 
-To execute from the command line use the following command from the folder containing the binaries:
+To execute from the command line use the following command from the folder containing the binaries:  
 `hackernews --posts n`
